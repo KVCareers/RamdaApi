@@ -1,6 +1,11 @@
 
-import { getRambdaRepos } from "./business_logic/logic/get-rambda-repos.js";
+import { GithubApiService } from "./business_logic/services/github_api_service/github-api.services.js";
 
 // Application Entry Point
 
-await getRambdaRepos();
+const githubApiService = new GithubApiService();
+let result: any[] = await githubApiService.getPullRequests("ramda", "ramda-fantasy");
+
+result.forEach(pullRequest => {
+    console.log(pullRequest);
+});

@@ -16,4 +16,19 @@ export class GithubApiService {
         const result: Repo[] = response.data;
         return result;
     }
+
+    async getPullRequests(orgName: string, repoName: string): Promise<any> {
+        // ex. https://api.github.com/repos/ramda/ramda-fantasy/pulls
+
+        let url = "";
+        url += `${GithubApiServiceConstants.API_ROOT_URL}`;
+        url += `/${GithubApiServiceConstants.ROUTE_REPOS}`;
+        url += `/${orgName}`;
+        url += `/${repoName}`;
+        url += `/${GithubApiServiceConstants.ROUTE_PULL_REQUESTS}`;
+
+        const response = await axios.get(url);
+        const result = response.data;
+        return result;
+    }
 }

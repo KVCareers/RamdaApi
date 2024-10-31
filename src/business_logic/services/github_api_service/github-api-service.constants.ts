@@ -7,5 +7,6 @@ export class GithubApiServiceConstants {
         // API ROUTES SECTION
         static readonly ROUTE_ORGS = 'orgs';
         static readonly ROUTE_REPOS = 'repos';        
+        static readonly ROUTE_PULL_REQUESTS = 'pulls';
         // - - - - -  - - - - -  - - - - -  - - - - -  - - - - -  - - - - -  - - - - -  - - - - -  - - - - -     
 }
