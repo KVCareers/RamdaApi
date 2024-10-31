@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GithubApiServiceConstants } from './github-api-service.constants.js';
 import { Repo } from '../../../models/github-api-service/repo.model.js';
+import { Pull } from '../../../models/github-api-service/pulls.model.js';
 
 export class GithubApiService {
     
@@ -17,7 +18,7 @@ export class GithubApiService {
         return result;
     }
 
-    async getPullRequests(orgName: string, repoName: string): Promise<any> {
+    async getPullRequests(orgName: string, repoName: string): Promise<Pull[]> {
         // ex. https://api.github.com/repos/ramda/ramda-fantasy/pulls
 
         let url = "";
@@ -28,7 +29,7 @@ export class GithubApiService {
         url += `/${GithubApiServiceConstants.ROUTE_PULL_REQUESTS}`;
 
         const response = await axios.get(url);
-        const result = response.data;
+        const result: Pull[] = response.data;
         return result;
     }
 }
