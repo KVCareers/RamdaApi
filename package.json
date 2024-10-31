@@ -1,0 +1,16 @@
+{
+  "name": "ramdaapi",
+  "version": "1.0.0",
+  "description": "Interacts with the Ramda organization using the Github web API",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"    
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

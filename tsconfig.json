@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    /* This file was created via command 'npx tsc --init' */
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+}
