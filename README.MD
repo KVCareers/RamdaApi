@@ -29,7 +29,7 @@ src/index.ts
 
 Any Business Logic services should be created at:
 ```
-src/business_logic
+src/business_logic/services
 ```
 
 Any Models should be created at:
@@ -43,3 +43,7 @@ src/models
   - Services should be named with ".service.ts" such as "hello-world.service.ts"
   - Interfaces should be named with ".interface.ts" such as "person.interface.ts"
   - Models should be named with ".model" such as "person.model.ts"
+
+# Generating Models for External APIs
+To generate model files for external API's, this project uses [quicktype](https://quicktype.io/). 
+You can use either the website itself, or the Visual Studio Code extension "Paste JSON as Code" by "quicktype"
