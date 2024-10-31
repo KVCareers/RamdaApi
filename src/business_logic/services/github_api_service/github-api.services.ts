@@ -20,7 +20,6 @@ export class GithubApiService {
 
     async getPullRequests(orgName: string, repoName: string): Promise<Pull[]> {
         // ex. https://api.github.com/repos/ramda/ramda-fantasy/pulls
-
         let url = "";
         url += `${GithubApiServiceConstants.API_ROOT_URL}`;
         url += `/${GithubApiServiceConstants.ROUTE_REPOS}`;
