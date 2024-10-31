@@ -52,7 +52,6 @@ src/models
 - Folders should always use snake case such as "business_logic" or "my_folder"
 - Files should always use kebab case as well as "type indicators". 
   - Services should be named with ".service.ts" such as "hello-world.service.ts"
-  - Interfaces should be named with ".interface.ts" such as "person.interface.ts"
   - Models should be named with ".model" such as "person.model.ts"
 
 # Generating Models for External APIs
