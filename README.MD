@@ -27,11 +27,22 @@ The code entry point is located at:
 src/index.ts
 ```
 
-Any Business Logic services should be created at:
+## Business Logic
+Business Logic is broken out into "services" and "logic". 
+Service files are meant to perform tasks.
+Logic files are meant to call services and perform business logic on the data.
+
+Any Business Logic service files should be created at:
 ```
 src/business_logic/services
 ```
 
+Any Business Logic logic files should be created at:
+```
+src/business_logic/logic
+```
+
+## Models
 Any Models should be created at:
 ```
 src/models
@@ -46,4 +57,4 @@ src/models
 
 # Generating Models for External APIs
 To generate model files for external API's, this project uses [quicktype](https://quicktype.io/). 
-You can use either the website itself, or the Visual Studio Code extension "Paste JSON as Code" by "quicktype"
+You can use either the website itself, or the Visual Studio Code extension "Paste JSON as Code" by the author "quicktype"
