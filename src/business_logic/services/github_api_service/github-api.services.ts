@@ -14,7 +14,7 @@ export class GithubApiService {
         url += `/${GithubApiServiceConstants.ROUTE_REPOS}`;        
         
         const response = await axios.get(url);
-        const result: Repo[] = response.data;
+        const result: Repo[] = (response?.data) ?? [];
         return result;
     }
 
@@ -29,7 +29,7 @@ export class GithubApiService {
         url += `/${GithubApiServiceConstants.ROUTE_PULL_REQUESTS}`;
 
         const response = await axios.get(url);
-        const result: Pull[] = response.data;
+        const result: Pull[] = (response?.data) ?? [];
         return result;
     }
 }
