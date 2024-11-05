@@ -1,4 +1,4 @@
-import { GithubApiService } from "../github_api_service/github-api.services.js";
+import { GithubApiService } from "../github_api_service/github-api.service.js";
 import { RamdaGithubApiServiceConstants } from "./ramda-github-api-service.constants.js";
 import { Repo } from "../../../models/github-api-service/repo.model.js";
 import { Pull } from "../../../models/github-api-service/pulls.model.js";

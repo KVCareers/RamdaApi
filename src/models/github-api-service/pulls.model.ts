@@ -18,8 +18,8 @@ export interface Pull {
     body:                string;
     created_at:          Date;
     updated_at:          Date;
-    closed_at:           null;
-    merged_at:           null;
+    closed_at:           Date;
+    merged_at:           Date;
     merge_commit_sha:    string;
     assignee:            null;
     assignees:           any[];

@@ -21,6 +21,24 @@ The project also has a "launch.json" file set up for Visual Studio code located 
 This will allow you to debug the project easily via "Run" -> "Start Debugging" or pressing the F5 hotkey.
 Note that everything in the .vscode folder is excluded in gitignore with the exception of the launch.json file
 
+# Configuration / API Keys
+In order to authenticate to the GitHub API, you'll need a personal access token.
+Create a classic personal access token via https://github.com/settings/tokens. 
+When creating the token, simply check the "read" options to give yourself read permissions to the different parts of the Github API.
+
+Now you'll need to create a private config for the project to access your API token.
+
+Create a file at the root of the project (at the same level as package.json, README, etc) named:
+```
+config.private.json
+```
+Create your json like this:
+```json
+{
+    "githubApiToken": "YOUR_API_TOKEN_HERE"
+}
+```
+
 # Project Structure Overview
 The code entry point is located at:
 ```
