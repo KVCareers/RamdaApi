@@ -8,6 +8,8 @@
 .vscode/
 !.vscode/launch.json
 
+# Exclude private config such as API keys etc
+config.private.json
 
 ########################################################################################################################################
 # Automatically generated Gitignore file below created via the command 'npx gitignore node'
