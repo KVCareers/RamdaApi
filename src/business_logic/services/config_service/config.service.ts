@@ -24,3 +24,6 @@ export class ConfigService {
         return result;
     }
 }
+
+const configService = new ConfigService();
+export default configService;

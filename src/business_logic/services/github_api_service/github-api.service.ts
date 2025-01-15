@@ -1,15 +1,16 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import axiosRetry from 'axios-retry';
-import { GithubApiServiceConstants } from './github-api-service.constants.js';
+import apiRateLimitDelayService, { ApiRateLimitDelayService } from '../api_rate_limit_delay_service/api-rate-limit-delay.service.js';
+import configService, { ConfigService } from '../config_service/config.service.js';
+import githubApiServiceConstants from './github-api-service.constants.js';
 import { Repo } from '../../../models/github-api-service/repo.model.js';
 import { Pull } from '../../../models/github-api-service/pulls.model.js';
-import { ApiRateLimitDelayService } from '../api_rate_limit_delay_service/api-rate-limit-delay.service.js';
-import { ConfigService } from '../config_service/config.service.js';
 
 export class GithubApiService {
     
-    readonly apiRateLimitDelayService = new ApiRateLimitDelayService();
-    readonly configService = new ConfigService();
+    private readonly axiosInstance: AxiosInstance;
+    private readonly apiRateLimitDelayService: ApiRateLimitDelayService;
+    private readonly configService: ConfigService;
     
     // Regex pattern to extract the "next" link from the "link" header
     // See: https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28#using-link-headers
@@ -21,7 +22,13 @@ export class GithubApiService {
     readonly exponentialRetryCount = 2;
 
     // Set up retries and auth token
-    constructor() {
+    constructor(axiosInstance: AxiosInstance, 
+                apiRateLimitDelayService: ApiRateLimitDelayService, 
+                configService: ConfigService) {
+        this.axiosInstance = axiosInstance;
+        this.apiRateLimitDelayService = apiRateLimitDelayService;
+        this.configService = configService;
+
         this.configureAxiosRetries();
         this.configureAxiosAuthToken();
     }
@@ -29,14 +36,14 @@ export class GithubApiService {
     async getRepos(orgName: string): Promise<Repo[]> {
         // ex. https://api.github.com/orgs/ramda/repos
         let url = "";
-        url += `${GithubApiServiceConstants.API_ROOT_URL}`;
-        url += `/${GithubApiServiceConstants.ROUTE_ORGS}`;
+        url += `${githubApiServiceConstants.API_ROOT_URL}`;
+        url += `/${githubApiServiceConstants.ROUTE_ORGS}`;
         url += `/${orgName}`;
-        url += `/${GithubApiServiceConstants.ROUTE_REPOS}`;        
+        url += `/${githubApiServiceConstants.ROUTE_REPOS}`;        
         
         // Query params: pagination
-        url += `?${GithubApiServiceConstants.QUERYPARAM_PER_PAGE}=${this.paginationCountPerPage}`;
-        url += `&${GithubApiServiceConstants.QUERYPARAM_PAGE}=${this.queryParamStartPage}`;
+        url += `?${githubApiServiceConstants.QUERYPARAM_PER_PAGE}=${this.paginationCountPerPage}`;
+        url += `&${githubApiServiceConstants.QUERYPARAM_PAGE}=${this.queryParamStartPage}`;
 
         let results: Repo[] = [];
 
@@ -76,18 +83,18 @@ export class GithubApiService {
         // Base url
         // ex. https://api.github.com/repos/ramda/ramda-fantasy/pulls
         let url = "";
-        url += `${GithubApiServiceConstants.API_ROOT_URL}`;
-        url += `/${GithubApiServiceConstants.ROUTE_REPOS}`;
+        url += `${githubApiServiceConstants.API_ROOT_URL}`;
+        url += `/${githubApiServiceConstants.ROUTE_REPOS}`;
         url += `/${orgName}`;
         url += `/${repoName}`;
-        url += `/${GithubApiServiceConstants.ROUTE_PULL_REQUESTS}`;
+        url += `/${githubApiServiceConstants.ROUTE_PULL_REQUESTS}`;
 
         // Query params: data filters
-        url += `?${GithubApiServiceConstants.QueryParamsGetPullRequests.QUERYPARAM_STATE}=${queryParamState}`;
+        url += `?${githubApiServiceConstants.QueryParamsGetPullRequests.QUERYPARAM_STATE}=${queryParamState}`;
         
         // Query params: pagination
-        url += `&${GithubApiServiceConstants.QUERYPARAM_PER_PAGE}=${this.paginationCountPerPage}`;
-        url += `&${GithubApiServiceConstants.QUERYPARAM_PAGE}=${queryParamStartPage}`;
+        url += `&${githubApiServiceConstants.QUERYPARAM_PER_PAGE}=${this.paginationCountPerPage}`;
+        url += `&${githubApiServiceConstants.QUERYPARAM_PAGE}=${queryParamStartPage}`;
 
         let results: Pull[] = [];
 
@@ -143,6 +150,9 @@ export class GithubApiService {
     }
 
     private getApiToken(): string {
-        return this.configService.getConfigValue(GithubApiServiceConstants.API_KEY_CONFIG_KEY_NAME);
+        return this.configService.getConfigValue(githubApiServiceConstants.API_KEY_CONFIG_KEY_NAME);
     }
 }
+
+const githubApiService = new GithubApiService(axios.create(), apiRateLimitDelayService, configService);
+export default githubApiService;
