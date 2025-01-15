@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts"
+    "start": "npm run build && node dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^22.8.4",
